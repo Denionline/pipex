@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/28 17:48:11 by dximenes          #+#    #+#              #
-#    Updated: 2025/08/04 11:02:42 by dximenes         ###   ########.fr        #
+#    Updated: 2025/08/06 15:42:22 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ GNL_PATH					= $(INC_PATH)/get_next_line/
 MAIN				= main
 
 FILES				+= parse
-FILES				+= files
 FILES				+= commands
 
 SRC_FILES			+= $(MAIN)
@@ -100,8 +99,8 @@ $(NAME): $(BUILD_PATH)
 		PERC=$$(printf "%d" $$((100 * CUR / TOTAL)));\
 		FILLED=$$(printf "%0.f" $$((20 * PERC / 100)));\
 		EMPTY=$$((20 - FILLED));\
-		BAR=$$(printf "$(C_GREEN)%*s$(C_STD)" $$FILLED "" | tr " " "#")\
-		$$(printf "%*s" $$EMPTY "" | tr " " ".");\
+		BAR=$$(printf "$(C_GREEN)%*s$(C_STD)" $$FILLED "" | tr " " "#")$$(\
+		printf "%*s" $$EMPTY "" | tr " " ".");\
 		printf "\rCompiling [%s] %3d%%" $$BAR $$PERC;\
 		CUR=$$((CUR + 1)); \
 	done;\
@@ -119,14 +118,13 @@ fclean: clean
 
 re: fclean all
 
-check_libraries: verify_ftprintf verify_gnl update_modules
+check_libraries: verify_ftprintf verify_gnl
 
 # libft processes
 verify_ftprintf:
 	@if test ! -d "$(FTPRINTF_PATH)"; then $(MAKE) get_ftprintf; \
 		else printf "ft_printf: $(C_GREEN)✅$(C_STD)\n"; fi
-	@$(MAKE) update_modules
-	@$(MAKE) -C $(FTPRINTF_PATH)
+	@$(MAKE) re -C $(FTPRINTF_PATH)
 
 get_ftprintf:
 	@echo "Cloning ft_printf"
@@ -137,15 +135,9 @@ get_ftprintf:
 verify_gnl:
 	@if test ! -d "$(GNL_PATH)"; then $(MAKE) get_gnl; \
 		else printf "get_next_line: $(C_GREEN)✅$(C_STD)\n"; fi
-	@$(MAKE) update_modules
-	@$(MAKE) -C $(GNL_PATH)
+	@$(MAKE) re -C $(GNL_PATH)
 
 get_gnl:
 	@printf "Cloning get_next_line\n"
 	@git clone $(GNL_URL) $(GNL_PATH)
 	@printf "$(C_GREEN)get_next_line$(C_STD) successfully downloaded\n"
-
-#general processes
-update_modules:
-	@git submodule init
-	@git submodule update --recursive --remote

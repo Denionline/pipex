@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:36:38 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/04 11:01:42 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:53:23 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 #include <sys/wait.h>
 #include <string.h>
 
-typedef struct s_commands
+typedef struct s_cmd
 {
-	int		amount;
-	char	**cmds;
-}	t_commands;
+	char	**args;
+	char	*path;
+}	t_cmd;
 
 typedef struct s_path
 {
@@ -34,18 +34,14 @@ typedef struct s_path
 
 typedef struct s_head
 {
-	t_path		file;
-	t_commands	commands;
+	t_path	file;
+	t_cmd	*cmds;
 }	t_head;
 
 // parse.c
-void	parse(t_head *head, int ac, char *av[]);
+void	parse(t_head *head, int ac, char *av[], char *ev[]);
 
-// files.c
-void	get_files(t_head *head, int ac, char *av[]);
-
-// commands.c
-int		get_amount(int ac, char *av[]);
-char	**get_commands(t_head *head, int ac, char *av[]);
+// // commands.c
+// char	**get_commands(t_head *head, int ac, char *av[]);
 
 #endif
