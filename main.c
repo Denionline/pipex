@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:36:25 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/06 17:25:08 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/08 11:55:28 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ int	main(int argc, char *argv[], char *envp[])
 	int	pipefd[2];
 
 	pipe(pipefd);
-	// int	id = fork();
+	int	id = fork();
 
-	dup2(fd_infile, 0);
 	dup2(fd_outfile, 1);
-	execve(head->cmds[0].path, head->cmds->args, NULL);
+	if (id == 0)
+	{
+		dup2(fd_infile, 0);
+		execve(head->cmds[0].path, head->cmds[0].args, NULL);
+	}
 }
 
 // ./pipex infile "grep M" "wc -l" outfile
