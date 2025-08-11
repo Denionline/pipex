@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/28 17:48:11 by dximenes          #+#    #+#              #
-#    Updated: 2025/08/11 11:25:41 by dximenes         ###   ########.fr        #
+#    Updated: 2025/08/11 11:43:39 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,7 +126,7 @@ check_libraries: verify_ftprintf verify_gnl
 verify_ftprintf:
 	@if test ! -d "$(FTPRINTF_PATH)"; then $(MAKE) get_ftprintf; \
 		else printf "ft_printf: $(C_GREEN)✅$(C_STD)\n"; fi
-	@$(MAKE) re -C $(FTPRINTF_PATH)
+	@$(MAKE) -C $(FTPRINTF_PATH)
 
 get_ftprintf:
 	@echo "Cloning ft_printf"
@@ -137,7 +137,7 @@ get_ftprintf:
 verify_gnl:
 	@if test ! -d "$(GNL_PATH)"; then $(MAKE) get_gnl; \
 		else printf "get_next_line: $(C_GREEN)✅$(C_STD)\n"; fi
-	@$(MAKE) re -C $(GNL_PATH)
+	@$(MAKE) -C $(GNL_PATH)
 
 get_gnl:
 	@printf "Cloning get_next_line\n"
