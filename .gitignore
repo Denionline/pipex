@@ -2,3 +2,7 @@
 .build/
 include/ft_printf
 include/get_next_line
+build/
+infile
+outfile
+pipex
