@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/28 17:48:11 by dximenes          #+#    #+#              #
-#    Updated: 2025/08/08 11:03:15 by dximenes         ###   ########.fr        #
+#    Updated: 2025/08/11 11:25:41 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,9 @@ GNL_PATH					= $(INC_PATH)/get_next_line/
 MAIN				= main
 
 FILES				+= parse
+FILES				+= get
 FILES				+= commands
+FILES				+= end
 
 SRC_FILES			+= $(MAIN)
 SRC_FILES			+= $(addprefix $(SRC_PATH), $(FILES))
