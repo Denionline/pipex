@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:16:31 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/11 11:26:05 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:27:05 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_fd get_fdfile(t_head *head)
 	fdfile.in = STDIN_FILENO;
 	if (head->file.in)
 		fdfile.in = open(head->file.in, O_RDONLY);
-	fdfile.out = open(head->file.out, head->file.outflag);
+	fdfile.out = open(head->file.out, head->file.outflag, 0644);
 	return (fdfile);
 }
 

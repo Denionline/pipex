@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/28 17:48:11 by dximenes          #+#    #+#              #
-#    Updated: 2025/08/11 11:43:39 by dximenes         ###   ########.fr        #
+#    Updated: 2025/08/11 14:11:51 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ CC							= cc
 LIBS						= $(FTPRINTF) $(LIBFT) $(GNL)
 CFLAGS						= -Werror -Wextra -Wall
 MAKE						= make --no-print-directory
+BONUS_FLAGS					= -D MAX_ARGS=1024 -D MIN_ARGS=2 
 
 # **************************************************************************** #
 #                                  Commands                                    #
@@ -91,7 +92,10 @@ all: start check_libraries $(NAME)
 start:
 	@printf "$(C_MAGENTA)===========Program [$(NAME)]===========$(C_STD)\n"
 
-$(NAME): $(BUILD_PATH)
+$(NAME): compile_files
+	@$(CC) $(CFLAGS) -I$(INC_PATH) $(OBJS) $(LIBS) -o $(NAME)
+
+compile_files: $(BUILD_PATH)
 	@printf "\n$(C_YELLOW)Compile $(NAME) files:$(C_STD)\n"
 	@TOTAL=$$(echo $(SRCS) | wc -w);\
 	CUR=1;\
@@ -107,7 +111,26 @@ $(NAME): $(BUILD_PATH)
 		CUR=$$((CUR + 1)); \
 	done;\
 	printf "\n";
-	@$(CC) $(CFLAGS) -I$(INC_PATH) $(OBJS) $(LIBS) -o $(NAME)
+
+bonus: compile_files_bonus
+	@$(CC) $(CFLAGS) -I$(INC_PATH) $(OBJS) $(LIBS) -o $(NAME) $(BONUS_FLAGS)
+
+compile_files_bonus: $(BUILD_PATH)
+	@printf "\n$(C_YELLOW)Compile $(NAME) files:$(C_STD)\n"
+	@TOTAL=$$(echo $(SRCS) | wc -w);\
+	CUR=1;\
+	for SRC in $(SRCS); do\
+		OBJ=$(BUILD_PATH)$$(basename $$SRC .c).o;\
+		$(CC) $(CFLAGS) -I$(INC_PATH) -c $$SRC -o $$OBJ $(BONUS_FLAGS);\
+		PERC=$$(printf "%d" $$((100 * CUR / TOTAL)));\
+		FILLED=$$(printf "%0.f" $$((20 * PERC / 100)));\
+		EMPTY=$$((20 - FILLED));\
+		BAR=$$(printf "$(C_GREEN)%*s$(C_STD)" $$FILLED "" | tr " " "#")$$(\
+		printf "%*s" $$EMPTY "" | tr " " ".");\
+		printf "\rCompiling [%s] %3d%%" $$BAR $$PERC;\
+		CUR=$$((CUR + 1)); \
+	done;\
+	printf "\n";
 
 $(BUILD_PATH):
 	@mkdir $(BUILD_PATH)

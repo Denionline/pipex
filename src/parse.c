@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:52:13 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/11 11:35:28 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:29:26 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	set_file(t_head *head, char *name, int pos)
 	}
 }
 
-static t_cmd	*get_and_handle_commands(t_head *head, int ac, char *av[], char **paths)
+static t_cmd	*get_handle_cmds(t_head *head, int ac, char *av[], char **paths)
 {
 	const char	*here_doc = "here_doc";
 	t_cmd		*commands;
@@ -59,13 +59,17 @@ void	parse(t_head **head, int ac, char *av[], char *ev[])
 	char	**paths;
 	int		i;
 
-	if (ac < 2)
-		return ;
+	if (ac < MIN_ARGS || ac > MAX_ARGS)
+		end(NULL, 4, NULL);
 	(*head) = ft_calloc(1, sizeof(t_head));
 	if (!(*head))
 		end(*head, 1, "head struct");
 	paths = get_paths(ev);
-	(*head)->cmds = get_and_handle_commands(*head, ac, av, paths);
+	if (!paths)
+		end(*head, 3, "PATH");
+	(*head)->cmds = get_handle_cmds(*head, ac, av, paths);
+	if (!(*head)->cmds)
+		end(*head, 1, "head->cmds");
 	i = 0;
 	while (paths[i] != NULL)
 		free(paths[i++]);

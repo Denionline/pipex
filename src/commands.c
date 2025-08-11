@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:33:57 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/11 11:34:42 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:35:41 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,21 @@ static void	close_both(int fdin, int fdout)
 
 static void	readinputs(int out, char *limiter)
 {
-	const int	limiter_size = ft_strlen(limiter);
+	const char	*prefix = "\n\0";
+	const char	*limiter_complete = ft_strjoin(limiter, prefix);
+	const int	limiter_size = ft_strlen(limiter_complete);
 	char		*str;
 
 	while (TRUE)
 	{
+		ft_printf("heredoc> ");
 		str = get_next_line(STDIN_FILENO);
-		if (!str || !ft_strncmp(str, limiter, limiter_size))
+		if (!str || !ft_strncmp(str, limiter_complete, limiter_size))
 			break ;
 		write(out, str, ft_strlen(str));
 		free(str);
 	}
+	free((char *)limiter_complete);
 	free(str);
 }
 

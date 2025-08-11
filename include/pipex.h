@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:36:38 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/11 11:23:33 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/11 13:27:45 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@
 #include <sys/wait.h>
 #include <string.h>
 
-#define COMMANDS_LIMIT 1024
+#ifndef MAX_ARGS
+# define MAX_ARGS 4
+#endif
+
+#ifndef MIN_ARGS
+# define MIN_ARGS 4
+#endif
+
 #define OUT 1
 #define IN 0
 

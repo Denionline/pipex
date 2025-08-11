@@ -43,8 +43,9 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-    "pipex.h": "c"
-  },
+	"pipex.h": "c",
+	"get_next_line.h": "c"
+},
   "C_Cpp_Runner.msvcWarnings": [
     "/W4",
     "/permissive-",
