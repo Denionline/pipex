@@ -3,7 +3,10 @@
     {
       "name": "linux-gcc-x64",
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/include/ft_printf/include",
+        "${workspaceFolder}/include/ft_printf/include/libft/include",
+        "${workspaceFolder}/include/get_next_line/include"
       ],
       "compilerPath": "/usr/bin/gcc",
       "cStandard": "${default}",

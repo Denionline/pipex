@@ -2,27 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug pipex",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceFolder}/pipex",
-      "args": [],
-      "stopAtEntry": false,
-      "cwd": "${workspaceFolder}",
-      "environment": [],
-      "externalConsole": false,
-      "MIMode": "gdb",
-      "preLaunchTask": "Build pipex"
-    },
-    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
-      "args": [],
+      "args": ["here_doc", "LIM", "grep M", "sort", "outfile"],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/dximenes/x/m2/pipex",
-      "program": "/home/dximenes/x/m2/pipex/build/Debug/outDebug",
+      "cwd": "/home/denionline/x/pipex",
+      "program": "/home/denionline/x/pipex/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

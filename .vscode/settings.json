@@ -9,14 +9,42 @@
   "C_Cpp_Runner.warnings": [
     "-Wall",
     "-Wextra",
-    "-Wpedantic",
-    "-Wshadow",
-    "-Wformat=2",
-    "-Wcast-align",
-    "-Wconversion",
-    "-Wsign-conversion",
-    "-Wnull-dereference"
+    "-Werror"
   ],
+  "C_Cpp_Runner.enableWarnings": true,
+  "C_Cpp_Runner.warningsAsError": false,
+  "C_Cpp_Runner.compilerArgs": [],
+  "C_Cpp_Runner.linkerArgs": [
+    "include/ft_printf/libftprintf.a",
+    "include/get_next_line/get_next_line.a"
+  ],
+  "C_Cpp_Runner.includePaths": [
+    "${workspaceFolder}/include/ft_printf/include",
+    "${workspaceFolder}/include/ft_printf/include/libft/include",
+    "${workspaceFolder}/include/get_next_line/include"
+  ],
+  "C_Cpp_Runner.includeSearch": [
+    "*",
+    "**/**",
+    "${workspaceFolder}/src/*"
+  ],
+  "C_Cpp_Runner.excludeSearch": [
+    "**/build",
+    "**/build/**",
+    "**/.*",
+    "**/.*/**",
+    "**/.vscode",
+    "**/.vscode/**"
+  ],
+  "C_Cpp_Runner.useAddressSanitizer": false,
+  "C_Cpp_Runner.useUndefinedSanitizer": false,
+  "C_Cpp_Runner.useLeakSanitizer": false,
+  "C_Cpp_Runner.showCompilationTime": false,
+  "C_Cpp_Runner.useLinkTimeOptimization": false,
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "files.associations": {
+    "pipex.h": "c"
+  },
   "C_Cpp_Runner.msvcWarnings": [
     "/W4",
     "/permissive-",
@@ -32,28 +60,5 @@
     "/w14263",
     "/w44265",
     "/w14928"
-  ],
-  "C_Cpp_Runner.enableWarnings": true,
-  "C_Cpp_Runner.warningsAsError": false,
-  "C_Cpp_Runner.compilerArgs": [],
-  "C_Cpp_Runner.linkerArgs": [],
-  "C_Cpp_Runner.includePaths": [],
-  "C_Cpp_Runner.includeSearch": [
-    "*",
-    "**/*"
-  ],
-  "C_Cpp_Runner.excludeSearch": [
-    "**/build",
-    "**/build/**",
-    "**/.*",
-    "**/.*/**",
-    "**/.vscode",
-    "**/.vscode/**"
-  ],
-  "C_Cpp_Runner.useAddressSanitizer": false,
-  "C_Cpp_Runner.useUndefinedSanitizer": false,
-  "C_Cpp_Runner.useLeakSanitizer": false,
-  "C_Cpp_Runner.showCompilationTime": false,
-  "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false
+  ]
 }
