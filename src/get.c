@@ -6,13 +6,13 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:16:31 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/11 14:27:05 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:49:13 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "include/pipex.h"
 
-t_fd get_fdfile(t_head *head)
+t_fd	get_fdfile(t_head *head)
 {
 	t_fd	fdfile;
 
@@ -23,7 +23,7 @@ t_fd get_fdfile(t_head *head)
 	return (fdfile);
 }
 
-char *get_valid_path(char **paths, char *command)
+char	*get_valid_path(char **paths, char *command)
 {
 	char	*complete_path;
 	char	*path_bar;

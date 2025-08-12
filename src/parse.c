@@ -6,11 +6,11 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:52:13 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/11 14:29:26 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/12 11:49:39 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "include/pipex.h"
 
 static void	set_file(t_head *head, char *name, int pos)
 {

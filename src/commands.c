@@ -6,11 +6,11 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:33:57 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/11 14:37:15 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/12 12:20:09 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "include/pipex.h"
 
 static void	close_both(int fdin, int fdout)
 {
@@ -64,10 +64,10 @@ static void	exec_cmd(int in, int out, t_cmd command, char **envp)
 
 void	commands(t_head *head, char *envp[])
 {
-	t_fd	filefd = get_fdfile(head);
-	int		pipefd[2];
-	int		in_fd;
-	int		i;
+	const t_fd	filefd = get_fdfile(head);
+	int			pipefd[2];
+	int			in_fd;
+	int			i;
 
 	in_fd = filefd.in;
 	if (head->is_heredoc)
@@ -87,5 +87,6 @@ void	commands(t_head *head, char *envp[])
 	if (in_fd != filefd.in)
 		close(in_fd);
 	close_both(filefd.in, filefd.out);
-	while (wait(NULL) > 0);
+	while (i > 0)
+		i = wait(NULL);
 }

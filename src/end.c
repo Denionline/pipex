@@ -6,11 +6,11 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 17:18:20 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/11 11:58:36 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/12 13:49:05 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "include/pipex.h"
 
 static void	clear_cmd(t_cmd *cmd)
 {
@@ -48,9 +48,9 @@ void	end(t_head *head, int status, char *description)
 			clear_cmd(&head->cmds[i++]);
 		if (head->cmds)
 			free(head->cmds);
-		if(head->file.in)
+		if (head->file.in)
 			free(head->file.in);
-		if(head->file.out)
+		if (head->file.out)
 			free(head->file.out);
 		free(head);
 	}

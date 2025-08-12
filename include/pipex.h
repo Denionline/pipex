@@ -6,30 +6,30 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:36:38 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/11 13:27:45 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/12 12:17:47 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FH_PIPEX
-# define FH_PIPEX
+#ifndef PIPEX_H
+# define PIPEX_H
 
-#include "ft_printf/include/ft_printf.h"
-#include "ft_printf/include/libft/include/libft.h"
-#include "get_next_line/include/get_next_line.h"
-#include <fcntl.h>
-#include <sys/wait.h>
-#include <string.h>
+# include "ft_printf/include/ft_printf.h"
+# include "ft_printf/include/libft/include/libft.h"
+# include "get_next_line/include/get_next_line.h"
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <string.h>
 
-#ifndef MAX_ARGS
-# define MAX_ARGS 4
-#endif
+# ifndef MAX_ARGS
+#  define MAX_ARGS 4
+# endif
 
-#ifndef MIN_ARGS
-# define MIN_ARGS 4
-#endif
+# ifndef MIN_ARGS
+#  define MIN_ARGS 4
+# endif
 
-#define OUT 1
-#define IN 0
+# define OUT 1
+# define IN 0
 
 typedef struct s_fd
 {
