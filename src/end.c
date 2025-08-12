@@ -6,11 +6,11 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 17:18:20 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/12 13:49:05 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:04:23 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/pipex.h"
+#include "pipex.h"
 
 static void	clear_cmd(t_cmd *cmd)
 {

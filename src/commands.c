@@ -6,11 +6,11 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:33:57 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/12 12:20:09 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:04:21 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/pipex.h"
+#include "pipex.h"
 
 static void	close_both(int fdin, int fdout)
 {
