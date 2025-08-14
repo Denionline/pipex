@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 17:18:20 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/12 14:04:23 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:29:10 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,16 @@ static void	show_error_msg(int error_code, char *description)
 	if (error_code == 1)
 		ft_printf("Malloc error: %s\n", description);
 	if (error_code == 2)
-		ft_printf("Command not found: %s\n", description);
+		ft_printf("Comando nao achado: %s\n", description);
 	if (error_code == 3)
-		ft_printf("Enviroment variable not found: %s\n", description);
+	ft_printf("Enviroment variable not found: %s\n", description);
 	if (error_code == 4)
 		ft_printf("Number of arguments invalid\n");
+	if (error_code == 5)
+	{
+		perror("zsh");
+		// ft_printf("%s\n", strerror(errno));
+	}
 }
 
 void	end(t_head *head, int status, char *description)

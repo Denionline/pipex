@@ -6,19 +6,26 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:52:13 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/12 14:04:21 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:19:33 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	set_file(t_head *head, char *name, int pos)
+static void	set_file(t_head *head, char *name, int pos, int len)
 {
-	if (!head->is_heredoc && pos == 0 && !access(name, R_OK))
-		head->file.in = ft_strdup(name);
-	else
+	if (!head->is_heredoc && pos == 0)
 	{
+		if (!access(name, R_OK))
+			head->file.in = ft_strdup(name);
+		else
+			end(head, 5, "No permission to read");
+	}
+	else if (pos == len - 1)
+	{
+		ft_printf("Outfile\n");
 		head->file.out = ft_strdup(name);
+		ft_printf("%s\n", head->file.out);
 		if (head->is_heredoc)
 			head->file.outflag = O_WRONLY | O_CREAT | O_APPEND;
 		else
@@ -26,32 +33,48 @@ static void	set_file(t_head *head, char *name, int pos)
 	}
 }
 
-static t_cmd	*get_handle_cmds(t_head *head, int ac, char *av[], char **paths)
+static t_cmd	*realloc_newcmds(t_head *h, t_cmd *old)
+{
+	t_cmd	*new_commands;
+	int		i;
+
+	new_commands = ft_calloc(h->cmds_size + 1, sizeof(t_cmd));
+	if (!new_commands)
+		return (NULL);
+	i = 0;
+	while (old && i < h->cmds_size)
+	{
+		new_commands[i] = old[i];
+		i++;
+	}
+	if (old)
+		free(old);
+	return (new_commands);
+}
+
+static void	get_handle_cmds(t_head *h, int ac, char *av[], char **paths)
 {
 	const char	*here_doc = "here_doc";
-	t_cmd		*commands;
-	int			j;
+	const int	lhere_doc = ft_strlen(here_doc);
 	int			i;
 
-	head->cmds_size = get_cmds_amount(ac, av);
-	commands = ft_calloc(head->cmds_size + 1, sizeof(t_cmd));
-	if (!commands)
-		return (NULL);
-	j = 0;
 	i = 0;
 	while (i < ac)
 	{
-		if (i == 0 && !ft_strncmp(av[i], here_doc, ft_strlen(here_doc)))
-			head->is_heredoc = TRUE;
-		else if (head->is_heredoc && i == 1)
-			head->limiter = av[i];
-		else if (!access(av[i], F_OK) || (access(av[i], F_OK) && i == ac - 1))
-			set_file(head, av[i], i);
+		if (i == 0 && !ft_strncmp(av[i], here_doc, lhere_doc))
+		{
+			h->is_heredoc = TRUE;
+			h->limiter = av[++i];
+		}
+		else if (!access(av[i], F_OK) || i == ac - 1)
+			set_file(h, av[i], i, ac);
 		else
-			commands[j++] = get_cmd(head, av[i], paths);
+		{
+			h->cmds = realloc_newcmds(h, h->cmds);
+			h->cmds[h->cmds_size++] = get_cmd(h, av[i], paths);
+		}
 		i++;
 	}
-	return (commands);
 }
 
 void	parse(t_head **head, int ac, char *av[], char *ev[])
@@ -67,7 +90,7 @@ void	parse(t_head **head, int ac, char *av[], char *ev[])
 	paths = get_paths(ev);
 	if (!paths)
 		end(*head, 3, "PATH");
-	(*head)->cmds = get_handle_cmds(*head, ac, av, paths);
+	get_handle_cmds(*head, ac, av, paths);
 	if (!(*head)->cmds)
 		end(*head, 1, "head->cmds");
 	i = 0;

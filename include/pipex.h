@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:36:38 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/12 12:17:47 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:26:02 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <string.h>
+# include <errno.h>
 
 # ifndef MAX_ARGS
 #  define MAX_ARGS 4
