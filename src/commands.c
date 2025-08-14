@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:33:57 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/12 14:04:21 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:08:47 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,16 @@ static int	get_and_handle_heredoc(t_head *head)
 
 static void	exec_cmd(int in, int out, t_cmd command, char **envp)
 {
-	pid_t	pid;
+	const pid_t	pid = fork();
 
-	pid = fork();
 	if (pid == 0)
 	{
+		ft_printf("Execucao do comando %s no STDIN=%d & STDOUT=%d\n", command.args[0], in, out);
 		dup2(in, STDIN_FILENO);
 		dup2(out, STDOUT_FILENO);
 		close_both(in, out);
 		execve(command.path, command.args, envp);
+		ft_printf("\nDeu erro no comando: %s\n\n", command.args[0]);
 	}
 }
 

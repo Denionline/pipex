@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:16:31 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/12 14:04:21 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/13 11:12:06 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,29 +59,14 @@ char	**get_paths(char *env[])
 	return (NULL);
 }
 
-int	get_cmds_amount(int ac, char *av[])
-{
-	int	amount;
-	int	i;
-
-	amount = 0;
-	i = 0;
-	while (i < ac)
-	{
-		if (access(av[i], F_OK))
-			amount += 1;
-		i++;
-	}
-	return (amount);
-}
-
 t_cmd	get_cmd(t_head *head, char *command, char **paths)
 {
 	t_cmd	cmd;
 
+	(void)head;
 	cmd.args = ft_split(command, ' ');
 	cmd.path = get_valid_path(paths, cmd.args[0]);
-	if (!cmd.path)
-		end(head, 2, command);
+	// if (!cmd.path)
+	// 	end(head, 2, command);
 	return (cmd);
 }
