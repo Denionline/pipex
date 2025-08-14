@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/28 17:48:11 by dximenes          #+#    #+#              #
-#    Updated: 2025/08/12 11:32:25 by dximenes         ###   ########.fr        #
+#    Updated: 2025/08/14 15:46:13 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ FILES				+= parse
 FILES				+= get
 FILES				+= commands
 FILES				+= end
+FILES				+= _bonus
 
 SRC_FILES			+= $(MAIN)
 SRC_FILES			+= $(addprefix $(SRC_PATH), $(FILES))
