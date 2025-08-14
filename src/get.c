@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:16:31 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/13 11:12:06 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/14 17:51:59 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*get_valid_path(char **paths, char *command)
 		free(complete_path);
 		j++;
 	}
-	return (NULL);
+	return (ft_strdup("/"));
 }
 
 char	**get_paths(char *env[])

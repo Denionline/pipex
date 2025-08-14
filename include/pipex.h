@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:36:38 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/13 17:26:02 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/14 17:47:22 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void	end(t_head *head, int status, char *description);
 t_fd	get_fdfile(t_head *head);
 char	*get_valid_path(char **paths, char *command);
 char	**get_paths(char *env[]);
-int		get_cmds_amount(int ac, char *av[]);
 t_cmd	get_cmd(t_head *head, char *command, char **paths);
+
+// _bonus.c
+void	readinputs(int out, char *limiter);
+int		get_and_handle_heredoc(t_head *head, int std_return);
 
 #endif

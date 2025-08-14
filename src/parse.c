@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:52:13 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/13 17:19:33 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:55:09 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@ static void	set_file(t_head *head, char *name, int pos, int len)
 		if (!access(name, R_OK))
 			head->file.in = ft_strdup(name);
 		else
-			end(head, 5, "No permission to read");
+			end(head, 5, name);
 	}
 	else if (pos == len - 1)
 	{
-		ft_printf("Outfile\n");
 		head->file.out = ft_strdup(name);
-		ft_printf("%s\n", head->file.out);
 		if (head->is_heredoc)
 			head->file.outflag = O_WRONLY | O_CREAT | O_APPEND;
 		else
