@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/28 17:48:11 by dximenes          #+#    #+#              #
-#    Updated: 2025/08/14 15:46:13 by dximenes         ###   ########.fr        #
+#    Updated: 2025/08/15 17:08:34 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ FILES				+= parse
 FILES				+= get
 FILES				+= commands
 FILES				+= end
+FILES				+= aux
 FILES				+= _bonus
 
 SRC_FILES			+= $(MAIN)

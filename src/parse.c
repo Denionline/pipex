@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:52:13 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/15 10:24:11 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/15 17:10:27 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,15 @@ static void	get_handle_cmds(t_head *h, int ac, char *av[], char **paths)
 
 void	parse(t_head **head, int ac, char *av[], char *ev[])
 {
-	char	**paths;
-	int		i;
-
 	if (ac < MIN_ARGS || ac > MAX_ARGS)
 		end(NULL, 4, NULL);
 	(*head) = ft_calloc(1, sizeof(t_head));
 	if (!(*head))
 		end(*head, 1, "head struct");
-	paths = get_paths(ev);
-	if (!paths)
+	(*head)->paths = get_paths(ev);
+	if (!(*head)->paths)
 		end(*head, 3, "PATH");
-	get_handle_cmds(*head, ac, av, paths);
+	get_handle_cmds(*head, ac, av, (*head)->paths);
 	if (!(*head)->cmds)
 		end(*head, 1, "head->cmds");
-	i = 0;
-	while (paths[i] != NULL)
-		free(paths[i++]);
-	free(paths);
 }
