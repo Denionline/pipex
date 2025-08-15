@@ -6,25 +6,18 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:33:57 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/15 10:39:27 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/15 17:37:02 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	close_both(int fdin, int fdout)
-{
-	close(fdin);
-	close(fdout);
-}
-
-static int	exec_cmd(int in, int out, t_cmd command, char **envp)
+static int	execute_command(int in, int out, t_cmd command, char **envp)
 {
 	const pid_t	pid = fork();
 
 	if (pid == 0)
 	{
-		// ft_printf("Cmd: %s & Path: %s | STDIN=%d & STDOUT=%d\n", command.args[0], command.path, in, out);
 		dup2(in, STDIN_FILENO);
 		dup2(out, STDOUT_FILENO);
 		close_both(in, out);
@@ -34,36 +27,37 @@ static int	exec_cmd(int in, int out, t_cmd command, char **envp)
 	return (0);
 }
 
-void	commands(t_head *head, char *envp[])
+static void	running_commands(t_head *head, int fd, t_fd filefd, char *envp[])
 {
-	const t_fd	filefd = get_fdfile(head);
-	int			pipefd[2];
-	int			in_fd;
-	int			i;
-	int			is_sucess;
+	int	pipefd[2];
+	int	i;
 
-	in_fd = get_and_handle_heredoc(head, filefd.in);
 	i = 0;
 	while (i < head->cmds_size - 1)
 	{
 		pipe(pipefd);
-		is_sucess = exec_cmd(in_fd, pipefd[OUT], head->cmds[i], envp);
-		ft_printf("%d\n");
-		if (is_sucess)
-		{
-			ft_printf("Errado\n");
-			end(head, 2, head->cmds[i].args[0]);
-		}
+		execute_command(fd, pipefd[OUT], head->cmds[i], envp);
 		close(pipefd[OUT]);
-		if (in_fd != filefd.in)
-			close(in_fd);
-		in_fd = pipefd[IN];
+		if (fd != filefd.in)
+			close(fd);
+		fd = pipefd[IN];
 		i++;
 	}
-	exec_cmd(in_fd, filefd.out, head->cmds[i], envp);
-	if (in_fd != filefd.in)
-		close(in_fd);
+	execute_command(fd, filefd.out, head->cmds[i], envp);
+	if (fd != filefd.in)
+		close(fd);
 	close_both(filefd.in, filefd.out);
-	while (i > 0)
-		i = wait(NULL);
+}
+
+void	commands(t_head *head, char *envp[])
+{
+	const t_fd	filefd = get_fdfile(head);
+	int			fd;
+	int			to_wait;
+
+	fd = get_and_handle_heredoc(head, filefd.in);
+	running_commands(head, fd, filefd, envp);
+	to_wait = 1;
+	while (to_wait > 0)
+		to_wait = wait(NULL);
 }

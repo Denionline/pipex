@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 18:16:31 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/14 17:51:59 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/15 17:40:06 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*get_valid_path(char **paths, char *command)
 		free(complete_path);
 		j++;
 	}
-	return (ft_strdup("/"));
+	return (NULL);
 }
 
 char	**get_paths(char *env[])
@@ -63,10 +63,12 @@ t_cmd	get_cmd(t_head *head, char *command, char **paths)
 {
 	t_cmd	cmd;
 
-	(void)head;
 	cmd.args = ft_split(command, ' ');
 	cmd.path = get_valid_path(paths, cmd.args[0]);
-	// if (!cmd.path)
-	// 	end(head, 2, command);
+	if (!cmd.path)
+	{
+		clear_args(cmd.args);
+		end(head, 2, command);
+	}
 	return (cmd);
 }

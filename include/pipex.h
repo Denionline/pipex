@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:36:38 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/14 17:47:22 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/15 17:08:09 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_head
 	t_cmd	*cmds;
 	int		cmds_size;
 	int		is_heredoc;
+	char	**paths;
 	char	*limiter;
 }	t_head;
 
@@ -73,6 +74,10 @@ t_fd	get_fdfile(t_head *head);
 char	*get_valid_path(char **paths, char *command);
 char	**get_paths(char *env[]);
 t_cmd	get_cmd(t_head *head, char *command, char **paths);
+
+// aux.c
+void	close_both(int fdin, int fdout);
+void	clear_args(char **args);
 
 // _bonus.c
 void	readinputs(int out, char *limiter);
