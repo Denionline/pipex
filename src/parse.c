@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:52:13 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/14 15:55:09 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/15 10:24:11 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	get_handle_cmds(t_head *h, int ac, char *av[], char **paths)
 			h->is_heredoc = TRUE;
 			h->limiter = av[++i];
 		}
-		else if (!access(av[i], F_OK) || i == ac - 1)
+		else if (i == 0 || !access(av[i], F_OK) || i == ac - 1)
 			set_file(h, av[i], i, ac);
 		else
 		{
