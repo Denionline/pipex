@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:52:13 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/15 17:10:27 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/16 10:38:02 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	get_handle_cmds(t_head *h, int ac, char *av[], char **paths)
 	i = 0;
 	while (i < ac)
 	{
-		if (i == 0 && !ft_strncmp(av[i], here_doc, lhere_doc))
+		if (i == 0 && !ft_strncmp(av[i], here_doc, lhere_doc) && MAX_ARGS > 4)
 		{
 			h->is_heredoc = TRUE;
 			h->limiter = av[++i];

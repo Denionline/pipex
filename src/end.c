@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 17:18:20 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/15 17:36:39 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/16 10:32:21 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static void	show_error_msg(int error_code, char *description)
 	else if (error_code == 4)
 		ft_printf("pipex: number of arguments invalid\n");
 	else if (error_code == 5)
-		ft_printf("zsh: permission denied: %s\n", description);
+		ft_printf("zsh: %s: %s\n", strerror(errno), description);
 	else
-		ft_printf("zsh: %s\n", strerror(error_code));
+		ft_printf("zsh: %s: %s\n", strerror(error_code), description);
 }
 
 void	end(t_head *head, int status, char *description)
