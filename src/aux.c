@@ -12,10 +12,13 @@
 
 #include "pipex.h"
 
-void	close_both(int fdin, int fdout)
+void	close_fds(void)
 {
-	close(fdin);
-	close(fdout);
+	int	fd;
+
+	fd = 3;
+	while(fd < 10)
+		close(fd++);
 }
 
 void	clear_args(char **args)
