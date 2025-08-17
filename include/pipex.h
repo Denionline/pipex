@@ -77,7 +77,7 @@ char	**get_paths(char *env[]);
 t_cmd	get_cmd(t_head *head, char *command, char **paths);
 
 // aux.c
-void	close_both(int fdin, int fdout);
+void	close_fds(void);
 void	clear_args(char **args);
 
 // _bonus.c
