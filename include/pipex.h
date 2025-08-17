@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:36:38 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/15 17:08:09 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/16 10:56:14 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	commands(t_head *head, char *envp[]);
 // end.c
 void	end(t_head *head, int status, char *description);
 
+// get.c
 t_fd	get_fdfile(t_head *head);
 char	*get_valid_path(char **paths, char *command);
 char	**get_paths(char *env[]);
