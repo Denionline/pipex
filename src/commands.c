@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-static int	execute_command(int in, int out, t_cmd command, char **envp)
+static pid_t	execute_command(int in, int out, t_cmd command, char **envp)
 {
 	const pid_t	pid = fork();
 
@@ -20,11 +20,11 @@ static int	execute_command(int in, int out, t_cmd command, char **envp)
 	{
 		dup2(in, STDIN_FILENO);
 		dup2(out, STDOUT_FILENO);
-		close_both(in, out);
+		close_fds();
 		execve(command.path, command.args, envp);
-		return (1);
+		return (pid);
 	}
-	return (0);
+	return (pid);
 }
 
 static void	running_commands(t_head *head, int fd, t_fd filefd, char *envp[])
@@ -36,7 +36,8 @@ static void	running_commands(t_head *head, int fd, t_fd filefd, char *envp[])
 	while (i < head->cmds_size - 1)
 	{
 		pipe(pipefd);
-		execute_command(fd, pipefd[OUT], head->cmds[i], envp);
+		if (!execute_command(fd, pipefd[OUT], head->cmds[i], envp))
+			end(head, errno, head->cmds[i].args[0]);
 		close(pipefd[OUT]);
 		if (fd != filefd.in)
 			close(fd);
@@ -46,14 +47,14 @@ static void	running_commands(t_head *head, int fd, t_fd filefd, char *envp[])
 	execute_command(fd, filefd.out, head->cmds[i], envp);
 	if (fd != filefd.in)
 		close(fd);
-	close_both(filefd.in, filefd.out);
+	close_fds();
 }
 
 void	commands(t_head *head, char *envp[])
 {
 	const t_fd	filefd = get_fdfile(head);
-	int			fd;
 	int			to_wait;
+	int			fd;
 
 	fd = get_and_handle_heredoc(head, filefd.in);
 	running_commands(head, fd, filefd, envp);
