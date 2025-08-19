@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 10:52:13 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/16 10:38:02 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/19 09:59:47 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,16 @@ static void	set_file(t_head *head, char *name, int pos, int len)
 	}
 	else if (pos == len - 1)
 	{
-		head->file.out = ft_strdup(name);
-		if (head->is_heredoc)
-			head->file.outflag = O_WRONLY | O_CREAT | O_APPEND;
+		if (!access(name, W_OK))
+		{
+			head->file.out = ft_strdup(name);
+			if (head->is_heredoc)
+				head->file.outflag = O_WRONLY | O_CREAT | O_APPEND;
+			else
+				head->file.outflag = O_WRONLY | O_CREAT | O_TRUNC;
+		}
 		else
-			head->file.outflag = O_WRONLY | O_CREAT;
+			end(head, 5, name);
 	}
 }
 
@@ -81,11 +86,11 @@ void	parse(t_head **head, int ac, char *av[], char *ev[])
 		end(NULL, 4, NULL);
 	(*head) = ft_calloc(1, sizeof(t_head));
 	if (!(*head))
-		end(*head, 1, "head struct");
+		end(*head, ENOMEM, "head");
 	(*head)->paths = get_paths(ev);
 	if (!(*head)->paths)
-		end(*head, 3, "PATH");
+		end(*head, 3, "head->paths");
 	get_handle_cmds(*head, ac, av, (*head)->paths);
 	if (!(*head)->cmds)
-		end(*head, 1, "head->cmds");
+		end(*head, ENOMEM, "head->cmds");
 }
