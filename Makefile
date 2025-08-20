@@ -6,7 +6,7 @@
 #    By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/28 17:48:11 by dximenes          #+#    #+#              #
-#    Updated: 2025/08/15 17:08:34 by dximenes         ###   ########.fr        #
+#    Updated: 2025/08/19 10:09:36 by dximenes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,32 +139,22 @@ $(BUILD_PATH):
 
 clean:
 	@rm -rf $(BUILD_PATH)
+	@$(MAKE) clean -C $(LIBFT_PATH)
+	@$(MAKE) clean -C $(FTPRINTF_PATH)
+	@$(MAKE) clean -C $(GNL_PATH)
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) $(FTPRINTF)
+	@$(RM) $(LIBFT)
+	@$(RM) $(GNL)
 
 re: fclean all
 
 check_libraries: verify_ftprintf verify_gnl
 
-# libft processes
 verify_ftprintf:
-	@if test ! -d "$(FTPRINTF_PATH)"; then $(MAKE) get_ftprintf; \
-		else printf "ft_printf: $(C_GREEN)✅$(C_STD)\n"; fi
 	@$(MAKE) -C $(FTPRINTF_PATH)
 
-get_ftprintf:
-	@echo "Cloning ft_printf"
-	@git clone $(FTPRINTF_URL) $(FTPRINTF_PATH)
-	@printf "$(C_GREEN)ft_printf$(C_STD) successfully downloaded\n"
-
-# get_next_line processes
 verify_gnl:
-	@if test ! -d "$(GNL_PATH)"; then $(MAKE) get_gnl; \
-		else printf "get_next_line: $(C_GREEN)✅$(C_STD)\n"; fi
 	@$(MAKE) -C $(GNL_PATH)
-
-get_gnl:
-	@printf "Cloning get_next_line\n"
-	@git clone $(GNL_URL) $(GNL_PATH)
-	@printf "$(C_GREEN)get_next_line$(C_STD) successfully downloaded\n"

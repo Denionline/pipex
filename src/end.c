@@ -6,7 +6,7 @@
 /*   By: dximenes <dximenes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 17:18:20 by dximenes          #+#    #+#             */
-/*   Updated: 2025/08/19 10:00:14 by dximenes         ###   ########.fr       */
+/*   Updated: 2025/08/19 10:22:35 by dximenes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static void	show_error_msg(int error_code, char *description)
 		ft_printf("pipex: enviroment variable not found: %s\n", description);
 	else if (error_code == 4)
 		ft_printf("pipex: number of arguments invalid\n");
-	else if (error_code == 5)
-		ft_printf("zsh: permission denied: %s\n", description);
 	else
 		ft_printf("zsh: %s: %s\n", strerror(error_code), description);
+	// else if (error_code == 5)
+	// 	ft_printf("zsh: permission denied: %s\n", description);
 }
 
 void	end(t_head *head, int status, char *description)
